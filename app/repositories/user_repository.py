@@ -36,6 +36,22 @@ class UserRepository(BaseRepository[User]):
 
         return result.scalar()
 
+    async def find_by_account(self, account: str) -> User | None:
+        """根據帳號取得資料
+
+        Args:
+            account (str): 帳號
+
+        Returns:
+            User | None: 會員資料
+
+        """
+        result: Result = await self.session.execute(
+            select(self.model).where(self.model.account == account)
+        )
+
+        return result.scalar()
+
 
 def get_user_repository(session: AsyncSession) -> UserRepository:
     return UserRepository(session)
