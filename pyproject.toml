@@ -82,6 +82,16 @@ prepend_sys_path = [
 # executable = "ruff"
 # options = "check --fix REVISION_SCRIPT_FILENAME"
 
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"app/**/*.py" = ["B008"]
+
 [tool.isort]
 profile = "black"
 line_length = 88

@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.api.v1 import health
+from app.api.v1 import auth, health
 from app.core.config import settings
 from app.db.redis import redis_client
 
@@ -20,3 +20,4 @@ app = FastAPI(
 )
 
 app.include_router(health.router, prefix="/api/v1")
+app.include_router(auth.router, prefix="/api/v1/auth")
