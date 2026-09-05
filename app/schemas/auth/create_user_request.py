@@ -1,13 +1,13 @@
 from typing import Self
 
-from pydantic import BaseModel, EmailStr, field_validator, model_validator
+from pydantic import BaseModel, EmailStr, Field, field_validator, model_validator
 
 
 class CreateUserRequest(BaseModel):
-    account: str
-    email: EmailStr
-    password: str
-    password_confirmation: str
+    account: str = Field(description="帳號")
+    email: EmailStr = Field(description="電子郵件")
+    password: str = Field(description="密碼")
+    password_confirmation: str = Field(description="確認密碼")
 
     @field_validator("password")
     @classmethod

@@ -11,7 +11,11 @@ router = APIRouter(prefix="", tags=["auth"])
 
 
 @router.post(
-    "/register", response_model=ApiResponse, status_code=status.HTTP_201_CREATED
+    "/register",
+    response_model=ApiResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="會員註冊",
+    description="會員註冊",
 )
 async def register(
     data: CreateUserRequest, auth_service: AuthService = Depends(get_auth_service)
