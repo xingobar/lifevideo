@@ -64,7 +64,7 @@ async def login(
 @router.get(
     "/me",
     status_code=status.HTTP_200_OK,
-    response_model=ApiResponse,
+    response_model=ApiResponse[AuthenticateResponse],
     description="取得用戶資訊",
     summary="取得用戶資訊",
 )
