@@ -16,6 +16,7 @@ security = HTTPBearer()
 def verify_token(
     credentials: HTTPAuthorizationCredentials = Depends(security),
 ) -> dict | None:
+    """驗證 token"""
     credential = credentials.credentials
     try:
         return jwt.decode(
@@ -37,6 +38,7 @@ async def get_current_user(
     session: AsyncSession = Depends(get_session),
     credential: dict | None = Depends(verify_token),
 ) -> User | None:
+    """取得目前的使用者"""
     user_service = get_user_service(session)
     user = await user_service.find_by_id(credential["id"])
 
