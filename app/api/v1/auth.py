@@ -42,7 +42,7 @@ async def register(
     status_code=status.HTTP_200_OK,
     summary="會員登入",
     description="會員登入",
-    response_model=LoginUserResponse,
+    response_model=ApiResponse[LoginUserResponse],
 )
 async def login(
     data: LoginUserRequest, auth_service: AuthService = Depends(get_auth_service)
@@ -50,7 +50,7 @@ async def login(
     try:
         token = await auth_service.login(data)
 
-        return {"access_token": token}
+        return ApiResponse(status=StatusCode.SUCCESS.code, data={"access_token": token})
     except PasswordErrorException as ex:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail=ex.detail
