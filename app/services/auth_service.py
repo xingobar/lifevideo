@@ -4,8 +4,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import get_session
 from app.exceptions.not_found_exception import NotFoundException
 from app.exceptions.password_error_exception import PasswordErrorException
-from app.schemas.auth.create_user_request import CreateUserRequest
-from app.schemas.auth.login_user_request import LoginUserRequest
+from app.schemas.auth.create_user import CreateUserRequest
+from app.schemas.auth.login_user import LoginUserRequest
 from app.schemas.user.create_user_dto import CreateUserDTO
 from app.services.user_service import UserService, get_user_service
 from app.utils.hash import verify_password

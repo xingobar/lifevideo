@@ -44,6 +44,9 @@ class UserService:
         """
         return await self.user_repository.find_by_account(account)
 
+    async def find_by_id(self, id: int) -> User | None:
+        return await self.user_repository.find_by_id(id)
+
 
 def get_user_service(session: AsyncSession) -> UserService:
     return UserService(user_repository=get_user_repository(session))
