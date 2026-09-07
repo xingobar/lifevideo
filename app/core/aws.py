@@ -2,6 +2,7 @@ from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 import aioboto3
+from types_aiobotocore_s3 import S3Client
 
 from app.core.config import settings
 
@@ -13,7 +14,7 @@ _session = aioboto3.Session(
 
 
 @asynccontextmanager
-async def get_s3_client() -> AsyncGenerator:
+async def get_s3_client() -> AsyncGenerator[S3Client, None]:
     async with _session.client("s3", endpoint_url=settings.AWS_ENDPOINT_URL) as client:
         yield client
 

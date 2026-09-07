@@ -23,5 +23,8 @@ class Settings(BaseSettings):
     AWS_ENDPOINT_URL: str = "http://localstack:4566"
     LOCALSTACK_AUTH_TOKEN: str
 
+    # AWS S3
+    AWS_BUCKET: str
+
 
 settings = Settings()
