@@ -1,5 +1,7 @@
+from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.db.session import get_session
 from app.exceptions.user_exist_exception import UserExistException
 from app.models.user import User
 from app.repositories.user_repository import UserRepository, get_user_repository
@@ -48,5 +50,5 @@ class UserService:
         return await self.user_repository.find_by_id(id)
 
 
-def get_user_service(session: AsyncSession) -> UserService:
+def get_user_service(session: AsyncSession = Depends(get_session)) -> UserService:
     return UserService(user_repository=get_user_repository(session))

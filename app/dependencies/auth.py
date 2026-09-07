@@ -5,7 +5,6 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
-from app.db.session import get_session
 from app.enums.status_code import StatusCode
 from app.models.user import User
 from app.services.user_service import get_user_service
@@ -35,11 +34,10 @@ def verify_token(
 
 
 async def get_current_user(
-    session: AsyncSession = Depends(get_session),
+    user_service: AsyncSession = Depends(get_user_service),
     credential: dict | None = Depends(verify_token),
 ) -> User | None:
     """取得目前的使用者"""
-    user_service = get_user_service(session)
     user = await user_service.find_by_id(credential["id"])
 
     if user is None:

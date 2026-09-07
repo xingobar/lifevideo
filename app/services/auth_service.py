@@ -45,5 +45,8 @@ class AuthService:
         return create_access_token({"id": user.id, "account": user.account})
 
 
-def get_auth_service(session: AsyncSession = Depends(get_session)) -> AuthService:
-    return AuthService(session=session, user_service=get_user_service(session))
+def get_auth_service(
+    session: AsyncSession = Depends(get_session),
+    user_service: UserService = Depends(get_user_service),
+) -> AuthService:
+    return AuthService(session=session, user_service=user_service)
