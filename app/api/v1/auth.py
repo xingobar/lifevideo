@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, status
 from fastapi.exceptions import HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.db.session import get_session
 from app.dependencies.auth import get_current_user
 from app.enums.status_code import StatusCode
 from app.exceptions.not_found_exception import NotFoundException
@@ -24,10 +26,15 @@ router = APIRouter(prefix="", tags=["auth"])
     description="會員註冊",
 )
 async def register(
-    data: CreateUserRequest, auth_service: AuthService = Depends(get_auth_service)
+    data: CreateUserRequest,
+    auth_service: AuthService = Depends(get_auth_service),
+    session: AsyncSession = Depends(get_session),
 ):
     try:
         await auth_service.register(data)
+
+        await session.commit()
+
         return ApiResponse(
             status=StatusCode.SUCCESS.code,
         )

@@ -21,7 +21,6 @@ class AuthService:
         await self.user_service.create(
             CreateUserDTO(**data.model_dump(exclude={"password_confirmation"}))
         )
-        await self.session.commit()
 
     async def login(self, data: LoginUserRequest) -> str:
         """會員登入
