@@ -16,5 +16,12 @@ class Settings(BaseSettings):
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
 
+    # AWS / LocalStack
+    AWS_ACCESS_KEY_ID: str = "test"
+    AWS_SECRET_ACCESS_KEY: str = "test"
+    AWS_DEFAULT_REGION: str = "ap-northeast-1"
+    AWS_ENDPOINT_URL: str = "http://localstack:4566"
+    LOCALSTACK_AUTH_TOKEN: str
+
 
 settings = Settings()
